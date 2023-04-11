@@ -94,5 +94,27 @@ public class StringSchemaTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    void stringMinLengthOK() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+        schema.required();
+        schema.minLength(5).isValid("what does the fox say"); // true
+        var actual = schema.isValid("what does the fox say"); // true
+        var expected = true;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void stringMinLengthNotOK() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+        schema.required();
+        schema.minLength(5).isValid("wh"); // false
+        var actual = schema.isValid("wh"); // false
+        var expected = false;
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
 }

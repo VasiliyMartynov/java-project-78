@@ -1,20 +1,26 @@
 package hexlet.code;
 
 public class StringSchema {
-    private boolean requiredCheck;
-    private boolean requiredContainsCheck;
+    private boolean isRequiredToBeChecked;
+    private boolean isRequiredToBeCheckedForMinLength;
+    private boolean isRequiredToBeCheckedForContaining;
+
+
     private Object content;
-    //private int minLength;
+    private int minLength;
     private Object containsContent;
     private Boolean isValid;
 
 
     StringSchema() {
-        this.requiredCheck = false;
-        this.requiredContainsCheck = false;
+        this.isRequiredToBeChecked = false;
+        this.isRequiredToBeCheckedForContaining = false;
+        this.isRequiredToBeCheckedForMinLength = false;
+
         this.content = null;
-        //this.minLength = 0;
+        this.minLength = 0;
         this.containsContent = null;
+
         this.isValid = true;
 
     }
@@ -22,46 +28,64 @@ public class StringSchema {
     //@Override
     public Boolean isValid(Object c) {
         this.content = c;
-        if (!this.requiredCheck) {
+
+        if (!this.isRequiredToBeChecked) {
             return this.isValid;
-        }
-        if (this.requiredCheck
-                && this.content instanceof String
-                && this.content != null
-                && toStr(this.content).length() > 0) {
-            this.isValid = true;
         } else {
-            this.isValid = false;
+            this.isValid = basicCheck();
         }
 
-        if (this.requiredContainsCheck) {
-            if (this.requiredCheck
-                    && this.content instanceof String
-                    && this.content != null
-                    && ((String) this.content).length() > 0
-                    && ((String) this.containsContent).length() > 0
-                    && toStr(this.content).contains(toStr(this.containsContent))) {
-                this.isValid = true;
-            } else {
-                this.isValid = false;
-            }
-
+        if (this.isRequiredToBeCheckedForContaining) {
+            this.isValid = containCheck();
         }
+
+        if (this.isRequiredToBeCheckedForMinLength) {
+            this.isValid = minLengthCheck();
+        }
+
         return this.isValid;
     }
 
     public void required() {
-        this.requiredCheck = true;
+        this.isRequiredToBeChecked = true;
     }
 
     public StringSchema contains(Object c) {
-        this.requiredContainsCheck = true;
+        this.isRequiredToBeCheckedForContaining = true;
         this.containsContent = c;
+        return this;
+    }
+
+    public StringSchema minLength(int n) {
+        this.isRequiredToBeCheckedForMinLength = true;
+        this.minLength = n;
         return this;
     }
 
     private String toStr(Object o) {
         return o.toString();
     }
+
+    private boolean basicCheck() {
+        if (this.content instanceof String && this.content != null && toStr(this.content).length() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean containCheck() {
+        if (((String) this.containsContent).length() > 0 && toStr(this.content).contains(toStr(this.containsContent))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean minLengthCheck() {
+        if (this.content.toString().length() >= this.minLength) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
