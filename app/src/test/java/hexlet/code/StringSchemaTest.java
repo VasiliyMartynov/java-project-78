@@ -78,6 +78,7 @@ public class StringSchemaTest {
         Validator v = new Validator();
         StringSchema schema = v.string();
         schema.required();
+
         var actual = schema.contains("whatthe").isValid("what does the fox say"); // false
         var expected = false;
         assertThat(actual).isEqualTo(expected);
@@ -115,6 +116,4 @@ public class StringSchemaTest {
         var expected = false;
         assertThat(actual).isEqualTo(expected);
     }
-
-
 }
