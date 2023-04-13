@@ -8,7 +8,7 @@ public class BaseSchema {
 
     boolean isValid;
     List<Predicate<Object>> checks;
-    private Object content;
+    Object content;
 
     BaseSchema() {
         this.isValid = true;
@@ -24,11 +24,11 @@ public class BaseSchema {
             for (Predicate<Object> c: checks) {
                 this.isValid = c.test(this.content);
                 if (!this.isValid) {
-                    return this.isValid;
+                    return false;
                 }
             }
         }
-        return this.isValid;
+        return true;
     }
 
 
