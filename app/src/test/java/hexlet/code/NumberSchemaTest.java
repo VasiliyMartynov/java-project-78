@@ -17,10 +17,19 @@ public class NumberSchemaTest {
         assertThat(actual).isEqualTo(expected);
     }
     @Test
-    void nullStringRequiredStatusFalse() {
+    void nullRequiredStatusFalse() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
         var actual = schema.isValid(null); // true
+        var expected = true;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void nullRequiredStatusFalseAndPositiveCheck() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        var actual = schema.positive().isValid(null); // true
         var expected = true;
         assertThat(actual).isEqualTo(expected);
     }
@@ -143,5 +152,20 @@ public class NumberSchemaTest {
         assertThat(actual2).isEqualTo(expected2);
         assertThat(actual3).isEqualTo(expected3);
         assertThat(actual4).isEqualTo(expected4);
+    }
+
+    @Test
+    void range4RequiredStatusTrue() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        schema.required().positive();
+        schema.range(6, 9);
+        var actual1 = schema.isValid(5); // false
+        var expected1 = false;
+        var actual2 = schema.isValid(10); // false
+        var expected2 = false;
+        assertThat(actual1).isEqualTo(expected1);
+        assertThat(actual2).isEqualTo(expected2);
+
     }
 }

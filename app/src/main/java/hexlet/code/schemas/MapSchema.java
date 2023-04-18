@@ -1,16 +1,13 @@
 package hexlet.code.schemas;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class MapSchema extends BaseSchema {
 
     public MapSchema required() {
         this.checks.add(x -> x instanceof Map<?, ?>);
-        this.checks.add(Objects::nonNull);
         return this;
     }
 

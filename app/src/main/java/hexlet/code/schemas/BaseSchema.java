@@ -18,8 +18,8 @@ public class BaseSchema {
 
     public boolean isValid(Object o) {
         this.content = o;
-        if (this.checks == null || this.checks.isEmpty()) {
-            return this.isValid;
+        if (this.checks.size() == 0) {
+            return true;
         } else {
             for (Predicate<Object> c: checks) {
                 this.isValid = c.test(this.content);
@@ -28,7 +28,7 @@ public class BaseSchema {
                 }
             }
         }
-        return true;
+        return this.isValid;
     }
 
 

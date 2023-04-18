@@ -109,8 +109,8 @@ public class MapSchemaTest {
         human2.put("name", "Maya");
         human2.put("age", null);
 
-        var actual = schema.isValid(human2); // false
-        var expected = false;
+        var actual = schema.isValid(human2); //true
+        var expected = true;
         assertThat(actual).isEqualTo(expected);
     }
 
