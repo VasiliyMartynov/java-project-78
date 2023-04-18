@@ -17,9 +17,17 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema range(int a, int b) {
+        if (a > b) {
+            var c = a;
+            a = b;
+            b = c;
+        }
+
         this.checks.add(x -> x != null);
-        this.checks.add(x -> (int) x >= a);
-        this.checks.add(x -> (int) x <= b);
+        int finalA = (Integer) a;
+        this.checks.add(x -> (int) x >= finalA);
+        int finalB = (Integer) b;
+        this.checks.add(x -> (int) x <= finalB);
         return this;
     }
 

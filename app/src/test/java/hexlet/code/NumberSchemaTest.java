@@ -76,6 +76,16 @@ public class NumberSchemaTest {
     }
 
     @Test
+    void nornalNumberRequiredStatusTrue() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        schema.required().positive();
+        var actual = schema.isValid(5); // true
+        var expected = true;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     void rangeRequiredStatusTrue() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
@@ -95,4 +105,43 @@ public class NumberSchemaTest {
         assertThat(actual4).isEqualTo(expected4);
     }
 
+    @Test
+    void range2RequiredStatusTrue() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        schema.required().positive();
+        schema.range(10, 5);
+        var actual1 = schema.isValid(5); // true
+        var expected1 = true;
+        var actual2 = schema.isValid(10); // true
+        var expected2 = true;
+        var actual3 = schema.isValid(4); // false
+        var expected3 = false;
+        var actual4 = schema.isValid(11); // false
+        var expected4 = false;
+        assertThat(actual1).isEqualTo(expected1);
+        assertThat(actual2).isEqualTo(expected2);
+        assertThat(actual3).isEqualTo(expected3);
+        assertThat(actual4).isEqualTo(expected4);
+    }
+
+    @Test
+    void range3RequiredStatusTrue() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        schema.required().positive();
+        schema.range(5, 5);
+        var actual1 = schema.isValid(5); // true
+        var expected1 = true;
+        var actual2 = schema.isValid(10); // false
+        var expected2 = false;
+        var actual3 = schema.isValid(4); // false
+        var expected3 = false;
+        var actual4 = schema.isValid(11); // false
+        var expected4 = false;
+        assertThat(actual1).isEqualTo(expected1);
+        assertThat(actual2).isEqualTo(expected2);
+        assertThat(actual3).isEqualTo(expected3);
+        assertThat(actual4).isEqualTo(expected4);
+    }
 }
