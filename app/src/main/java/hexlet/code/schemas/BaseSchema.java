@@ -28,9 +28,6 @@ public class BaseSchema {
                 }
             }
         }
-        return this.isValid;
+        return true;
     }
-
-
-
 }

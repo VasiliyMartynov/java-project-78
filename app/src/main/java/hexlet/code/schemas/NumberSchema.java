@@ -1,5 +1,7 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
+
 public class NumberSchema extends BaseSchema {
 
     public NumberSchema required() {
@@ -23,10 +25,10 @@ public class NumberSchema extends BaseSchema {
             a = b;
             b = c;
         }
-        this.checks.add(x -> x != null);
-        int finalA = (Integer) a;
+        this.checks.add(Objects::nonNull);
+        int finalA = a;
         this.checks.add(x -> (int) x >= finalA);
-        int finalB = (Integer) b;
+        int finalB = b;
         this.checks.add(x -> (int) x <= finalB);
         return this;
     }

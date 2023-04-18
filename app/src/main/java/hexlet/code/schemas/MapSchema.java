@@ -14,7 +14,7 @@ public class MapSchema extends BaseSchema {
     public MapSchema sizeof(int size) {
         this.checks.add(x -> {
             ObjectMapper mapObject = new ObjectMapper();
-            HashMap<Object, Object> map = mapObject.convertValue(x, HashMap.class);
+            HashMap map = mapObject.convertValue(x, HashMap.class);
             return map.size() >= size;
         });
         return this;
@@ -24,7 +24,7 @@ public class MapSchema extends BaseSchema {
         this.checks.add(x -> schemas.entrySet().stream()
                 .allMatch(e -> {
                     ObjectMapper mapObject = new ObjectMapper();
-                    Map<Object, Object> map = mapObject.convertValue(x, Map.class);
+                    Map map = mapObject.convertValue(x, Map.class);
                     Object v = map.get(e.getKey());
                     return e.getValue().isValid(v);
                 }));
