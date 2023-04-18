@@ -1,6 +1,7 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
