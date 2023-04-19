@@ -3,7 +3,6 @@ package hexlet.code.schemas;
 public final class StringSchema extends BaseSchema {
 
     public StringSchema required() {
-        this.checks.clear();
         this.checks.add(x -> x instanceof String);
         this.checks.add(x -> x.toString().length() > 0);
         return this;

@@ -5,13 +5,13 @@ import java.util.Objects;
 public class NumberSchema extends BaseSchema {
 
     public NumberSchema required() {
-        this.checks.clear();
-        this.checks.add(x -> x instanceof Integer);
+        this.checks.add(0, x -> x instanceof Integer);
         return this;
     }
 
     public NumberSchema positive() {
         this.checks.add(x -> {
+
             if (x == null) {
                 return true;
             }
