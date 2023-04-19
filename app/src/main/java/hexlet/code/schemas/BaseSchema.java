@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    boolean isValid;
-    List<Predicate<Object>> checks;
-    Object content;
+    private boolean isValid;
+    private final List<Predicate<Object>> checks;
+    private Object content;
 
     BaseSchema() {
         this.isValid = true;
@@ -16,7 +16,15 @@ public class BaseSchema {
         this.content = null;
     }
 
-    public boolean isValid(Object o) {
+    public final void addChecks(Predicate p) {
+        this.checks.add(p);
+    }
+
+    public final void addChecks(int index, Predicate p) {
+        this.checks.add(index, p);
+    }
+
+    public final boolean isValid(Object o) {
         this.content = o;
         if (this.checks.size() == 0) {
             return true;

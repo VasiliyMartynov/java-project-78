@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class MapSchema extends BaseSchema {
 
-    public MapSchema required() {
-        this.checks.add(x -> x instanceof Map<?, ?>);
+    public final MapSchema required() {
+        addChecks(x -> x instanceof Map<?, ?>);
         return this;
     }
 
-    public MapSchema sizeof(int size) {
-        this.checks.add(x -> {
+    public final MapSchema sizeof(int size) {
+        addChecks(x -> {
             ObjectMapper mapObject = new ObjectMapper();
             HashMap map = mapObject.convertValue(x, HashMap.class);
             return map.size() >= size;
@@ -20,8 +20,8 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> schemas) {
-        this.checks.add(x -> schemas.entrySet().stream()
+    public final MapSchema shape(Map<String, BaseSchema> schemas) {
+        addChecks(x -> schemas.entrySet().stream()
                 .allMatch(e -> {
                     ObjectMapper mapObject = new ObjectMapper();
                     Map map = mapObject.convertValue(x, Map.class);
