@@ -65,6 +65,32 @@ public class NumberSchemaTest {
     }
 
     @Test
+    void string2RequiredStatusTrue() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        schema.required();
+        var actual = schema.isValid("5"); // false
+        var expected = false;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testNumberValidator() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+
+        assertThat(schema.isValid(5)).isTrue();
+        assertThat(schema.isValid(null)).isTrue();
+
+        assertThat(schema.positive().isValid(null)).isTrue();
+
+        schema.required();
+        assertThat(schema.isValid(null)).isFalse();
+        assertThat(schema.isValid("5")).isFalse();
+
+    }
+
+    @Test
     void negativeRequiredStatusTrue() {
         Validator v = new Validator();
         NumberSchema schema = v.number();

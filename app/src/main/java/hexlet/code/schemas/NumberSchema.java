@@ -5,6 +5,7 @@ import java.util.Objects;
 public class NumberSchema extends BaseSchema {
 
     public NumberSchema required() {
+        this.checks.clear();
         this.checks.add(x -> x instanceof Integer);
         return this;
     }

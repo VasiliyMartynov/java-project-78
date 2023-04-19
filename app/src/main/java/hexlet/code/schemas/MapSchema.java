@@ -7,6 +7,7 @@ import java.util.Map;
 public class MapSchema extends BaseSchema {
 
     public MapSchema required() {
+        this.checks.clear();
         this.checks.add(x -> x instanceof Map<?, ?>);
         return this;
     }
