@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class BaseSchema {
-
-    private boolean isValid;
+public abstract class BaseSchema {
     private final List<Predicate<Object>> checks;
-    private Object content;
 
     BaseSchema() {
-        this.isValid = true;
         this.checks = new ArrayList<>();
-        this.content = null;
     }
+
+    abstract BaseSchema required();
 
     public final void addChecks(Predicate p) {
         this.checks.add(p);
@@ -25,17 +22,16 @@ public class BaseSchema {
     }
 
     public final boolean isValid(Object o) {
-        this.content = o;
         if (this.checks.size() == 0) {
             return true;
-        } else {
-            for (Predicate<Object> c: checks) {
-                this.isValid = c.test(this.content);
-                if (!this.isValid) {
-                    return false;
-                }
+        }
+
+        for (Predicate<Object> c: checks) {
+            if (!c.test(o)) {
+                return false;
             }
         }
+
         return true;
     }
 }
