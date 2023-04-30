@@ -8,12 +8,7 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema positive() {
-        addChecks(x -> {
-            if (x == null) {
-                return true;
-            }
-            return (int) x > 0;
-        });
+        addChecks(x -> x == null || (x instanceof Integer n && n > 0));
         return this;
     }
 
@@ -28,5 +23,4 @@ public final class NumberSchema extends BaseSchema {
         addChecks(x -> (int) x >= finalA && (int) x <= finalB);
         return this;
     }
-
 }

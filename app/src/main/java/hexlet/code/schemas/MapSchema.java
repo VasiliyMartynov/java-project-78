@@ -31,5 +31,3 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 }
-
-

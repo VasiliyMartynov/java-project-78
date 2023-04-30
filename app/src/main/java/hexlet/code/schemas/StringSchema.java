@@ -17,7 +17,4 @@ public final class StringSchema extends BaseSchema {
         addChecks(x -> x.toString().contains(s));
         return this;
     }
-
-
-
 }

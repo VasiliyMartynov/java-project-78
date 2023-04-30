@@ -3,7 +3,8 @@ package hexlet.code;
 
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class StringSchemaTest {
 
@@ -13,7 +14,7 @@ public class StringSchemaTest {
         StringSchema schema = v.string();
         var actual = schema.isValid(""); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
     @Test
     void nullStringRequiredStatusFalse() {
@@ -21,7 +22,7 @@ public class StringSchemaTest {
         StringSchema schema = v.string();
         var actual = schema.isValid(null); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -31,7 +32,7 @@ public class StringSchemaTest {
         schema.required();
         var actual = schema.isValid(null); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class StringSchemaTest {
         schema.required();
         var actual = schema.isValid(""); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class StringSchemaTest {
         schema.required();
         var actual = schema.isValid(5); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -61,7 +62,7 @@ public class StringSchemaTest {
         schema.required();
         var actual = schema.isValid("what does the fox say"); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -71,7 +72,7 @@ public class StringSchemaTest {
         schema.required();
         var actual = schema.contains("wh").isValid("what does the fox say"); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class StringSchemaTest {
 
         var actual = schema.contains("whatthe").isValid("what does the fox say"); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -93,7 +94,7 @@ public class StringSchemaTest {
         schema.contains("whatthe").isValid("what does the fox say"); // false
         var actual = schema.isValid("what does the fox say"); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -104,7 +105,7 @@ public class StringSchemaTest {
         schema.minLength(5).isValid("what does the fox say"); // true
         var actual = schema.isValid("what does the fox say"); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -115,6 +116,6 @@ public class StringSchemaTest {
         schema.minLength(5).isValid("wh"); // false
         var actual = schema.isValid("wh"); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 }

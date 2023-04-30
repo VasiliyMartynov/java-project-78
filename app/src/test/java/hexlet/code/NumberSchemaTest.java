@@ -3,8 +3,9 @@ package hexlet.code;
 
 import hexlet.code.schemas.NumberSchema;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NumberSchemaTest {
 
@@ -14,7 +15,7 @@ public class NumberSchemaTest {
         NumberSchema schema = v.number();
         var actual = schema.isValid("not number"); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
     @Test
     void nullRequiredStatusFalse() {
@@ -22,7 +23,7 @@ public class NumberSchemaTest {
         NumberSchema schema = v.number();
         var actual = schema.isValid(null); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -31,7 +32,7 @@ public class NumberSchemaTest {
         NumberSchema schema = v.number();
         var actual = schema.positive().isValid(null); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid(null); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid(0); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -61,7 +62,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid("5"); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -71,35 +72,33 @@ public class NumberSchemaTest {
         schema.required();
         var actual = schema.isValid("5"); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
     public void testNumberValidator() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
-
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(null)).isTrue();
-
-        assertThat(schema.positive().isValid(null)).isTrue();
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.positive().isValid(null));
 
         schema.required();
-        assertThat(schema.isValid(null)).isFalse();
-        assertThat(schema.isValid("5")).isFalse();
-        assertThat(schema.isValid(-10)).isFalse();
-        assertThat(schema.isValid(0)).isFalse();
-        assertThat(schema.isValid(10)).isTrue();
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid("5"));
+        assertFalse(schema.isValid(-10));
+        assertFalse(schema.isValid(0));
+        assertTrue(schema.isValid(10));
 
         schema.range(5, 10);
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(10)).isTrue();
-        assertThat(schema.isValid(4)).isFalse();
-        assertThat(schema.isValid(11)).isFalse();
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(11));
 
         schema.range(6, 9);
-        assertThat(schema.isValid(5)).isFalse();
-        assertThat(schema.isValid(10)).isFalse();
+        assertFalse(schema.isValid(5));
+        assertFalse(schema.isValid(10));
     }
 
     @Test
@@ -109,7 +108,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid(-5); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -119,7 +118,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid(0); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -129,7 +128,7 @@ public class NumberSchemaTest {
         schema.required().positive();
         var actual = schema.isValid(5); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -146,10 +145,10 @@ public class NumberSchemaTest {
         var expected3 = false;
         var actual4 = schema.isValid(11); // false
         var expected4 = false;
-        assertThat(actual1).isEqualTo(expected1);
-        assertThat(actual2).isEqualTo(expected2);
-        assertThat(actual3).isEqualTo(expected3);
-        assertThat(actual4).isEqualTo(expected4);
+        assertEquals(actual1, expected1);
+        assertEquals(actual2, expected2);
+        assertEquals(actual3, expected3);
+        assertEquals(actual4, expected4);
     }
 
     @Test
@@ -166,10 +165,10 @@ public class NumberSchemaTest {
         var expected3 = false;
         var actual4 = schema.isValid(11); // false
         var expected4 = false;
-        assertThat(actual1).isEqualTo(expected1);
-        assertThat(actual2).isEqualTo(expected2);
-        assertThat(actual3).isEqualTo(expected3);
-        assertThat(actual4).isEqualTo(expected4);
+        assertEquals(actual1, expected1);
+        assertEquals(actual2, expected2);
+        assertEquals(actual3, expected3);
+        assertEquals(actual4, expected4);
     }
 
     @Test
@@ -186,10 +185,10 @@ public class NumberSchemaTest {
         var expected3 = false;
         var actual4 = schema.isValid(11); // false
         var expected4 = false;
-        assertThat(actual1).isEqualTo(expected1);
-        assertThat(actual2).isEqualTo(expected2);
-        assertThat(actual3).isEqualTo(expected3);
-        assertThat(actual4).isEqualTo(expected4);
+        assertEquals(actual1, expected1);
+        assertEquals(actual2, expected2);
+        assertEquals(actual3, expected3);
+        assertEquals(actual4, expected4);
     }
 
     @Test
@@ -202,8 +201,8 @@ public class NumberSchemaTest {
         var expected1 = false;
         var actual2 = schema.isValid(10); // false
         var expected2 = false;
-        assertThat(actual1).isEqualTo(expected1);
-        assertThat(actual2).isEqualTo(expected2);
+        assertEquals(actual1, expected1);
+        assertEquals(actual2, expected2);
 
     }
 }

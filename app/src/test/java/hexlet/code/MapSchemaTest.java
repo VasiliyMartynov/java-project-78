@@ -3,11 +3,9 @@ package hexlet.code;
 import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MapSchemaTest {
 
@@ -17,7 +15,8 @@ public class MapSchemaTest {
         MapSchema schema = v.map();
         var actual = schema.isValid(null); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
+        //assertThat(actual).isEqualTo(expected);
     }
     @Test
     void nullStatusTrue() {
@@ -26,7 +25,7 @@ public class MapSchemaTest {
         schema.required();
         var actual = schema.isValid(null); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -36,7 +35,7 @@ public class MapSchemaTest {
         schema.required();
         var actual = schema.isValid(new HashMap());  // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -48,7 +47,7 @@ public class MapSchemaTest {
         data.put("key1", "value1");
         var actual = schema.isValid(data); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -61,7 +60,7 @@ public class MapSchemaTest {
         schema.sizeof(2);
         var actual = schema.isValid(data); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -75,7 +74,7 @@ public class MapSchemaTest {
         schema.sizeof(2);
         var actual = schema.isValid(data); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -93,7 +92,7 @@ public class MapSchemaTest {
 
         var actual = schema.isValid(human1); // true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -111,7 +110,7 @@ public class MapSchemaTest {
 
         var actual = schema.isValid(human2); //true
         var expected = true;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -129,7 +128,7 @@ public class MapSchemaTest {
 
         var actual = schema.isValid(human3); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -147,6 +146,6 @@ public class MapSchemaTest {
 
         var actual = schema.isValid(human4); // false
         var expected = false;
-        assertThat(actual).isEqualTo(expected);
+        assertEquals(actual, expected);
     }
 }
